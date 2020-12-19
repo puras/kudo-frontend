@@ -13,7 +13,7 @@ let instance = null
 function render(props = {}) {
   const { container } = props
   router = new VueRouter({
-    base: window.__POWERED_BY_QIANKUN__ ? '/dashboard' : '/',
+    base: window.__POWERED_BY_QIANKUN__ ? '/kudo' : '/',
     mode: 'history',
     routes
   })
@@ -42,11 +42,15 @@ function storeTest(props) {
   })
 }
 
-export async function bootstrap() {
+export async function bootstrap(props) {
+  console.log(props)
   console.log('[vue] vue app bootstraped')
 }
 
 export async function mount(props) {
+  if (props.components) {
+    Vue.use(props.components)
+  }
   console.log('[vue] props from main framework', props)
   storeTest(props)
   render(props)
